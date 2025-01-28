@@ -14,9 +14,16 @@ CREATE TABLE "Projet" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "contexte" TEXT NOT NULL,
+    "technologies" TEXT NOT NULL,
+    "resultats" TEXT NOT NULL,
+    "objectifs" TEXT NOT NULL,
     "client" TEXT NOT NULL,
     "date_realisation" DATETIME NOT NULL,
-    "completed" BOOLEAN NOT NULL DEFAULT false
+    "completed" BOOLEAN NOT NULL DEFAULT false,
+    "images" TEXT NOT NULL,
+    "videos" TEXT NOT NULL,
+    "testimonials" TEXT NOT NULL
 );
 
 -- CreateIndex
