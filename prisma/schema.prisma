@@ -9,3 +9,22 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  name        String
+  email       String   @unique
+  telephone   String  
+  message     String
+  completed   Boolean  @default(false)
+}
+
+model Projet {
+  id               Int      @id @default(autoincrement())
+  name             String
+  description      String
+  client           String
+  date_realisation DateTime
+  completed        Boolean  @default(false)
+}
