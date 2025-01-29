@@ -1,116 +1,110 @@
 'use client';
 
-import { useState } from 'react';
+import { useActionState } from 'react';
+import { submitContactForm, State } from '../api/contact/action';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
-const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    telephone: '',
-    message: '',
-  });
-
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+export default function ContactForm() {
+  const initialState: State = {
+    message: null,
+    errors: {},
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setSuccess(false);
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-    // const response = await fetch('http://localhost/Projet-SSR/my-app/pages/api/send-email.php', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    //     body: new URLSearchParams(formData).toString(),
-    // });
-    
-
-      if (response.ok) {
-        setSuccess(true);
-        setFormData({ name: '', email: '', telephone: '', message: '' });
-      } else {
-        const data = await response.json();
-        setError(data.error || 'An error occurred. Please try again.');
-      }
-    } catch (err) {
-      setError('An error occurred. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
 
   return (
-    <div className="max-w-md mx-auto p-6  shadow-md rounded-lg">
-      <h1 className="text-xl font-bold mb-4">Contact Us</h1>
-      {success && <p className="text-green-600 mb-4">Message sent successfully!</p>}
-      {error && <p className="text-red-600 mb-4">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border rounded-lg"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border rounded-lg"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1">Telephone (optional)</label>
-          <input
-            type="text"
-            name="telephone"
-            value={formData.telephone}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1">Message</label>
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows={4}
-            className="w-full px-3 py-2 border rounded-lg"
-          ></textarea>
-        </div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700"
-        >
-          {loading ? 'Sending...' : 'Send Message'}
-        </button>
-      </form>
-    </div>
-  );
-};
+    <div style={{ background: 'linear-gradient(to right, #ff7f50, #9b59b6)', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ width: '100%', maxWidth: '400px', padding: '24px', backgroundColor: 'white', color: 'black', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '24px', textAlign: 'center' }}>Contactez-nous</h2>
 
-export default ContactForm;
+        <form action={formAction} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {/* Champ : Nom */}
+          <div>
+            <label htmlFor="name" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500' }}>Nom</label>
+            <Input
+              type="text"
+              id="name"
+              name="name"
+              required
+              style={{ marginTop: '4px', width: '100%', borderRadius: '4px', padding: '8px', border: '1px solid #d1d5db' }}
+            />
+            {state.errors?.name && <p style={{ color: 'red', fontSize: '0.875rem', marginTop: '4px' }}>{state.errors.name[0]}</p>}
+          </div>
+
+          {/* Champ : Email */}
+          <div>
+            <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500' }}>E-mail</label>
+            <Input
+              type="email"
+              id="email"
+              name="email"
+              required
+              style={{ marginTop: '4px', width: '100%', borderRadius: '4px', padding: '8px', border: '1px solid #d1d5db' }}
+            />
+            {state.errors?.email && <p style={{ color: 'red', fontSize: '0.875rem', marginTop: '4px' }}>{state.errors.email[0]}</p>}
+          </div>
+
+          {/* Champ : Téléphone */}
+          <div>
+            <label htmlFor="telephone" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500' }}>Téléphone</label>
+            <Input
+              type="text"
+              id="telephone"
+              name="telephone"
+              style={{ marginTop: '4px', width: '100%', borderRadius: '4px', padding: '8px', border: '1px solid #d1d5db' }}
+            />
+          </div>
+
+          {/* Champ : Message */}
+          <div>
+            <label htmlFor="message" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500' }}>Message</label>
+            <Textarea
+              id="message"
+              name="message"
+              required
+              style={{ marginTop: '4px', width: '100%', borderRadius: '4px', padding: '8px', border: '1px solid #d1d5db' }}
+              rows={4}
+            />
+            {state.errors?.message && <p style={{ color: 'red', fontSize: '0.875rem', marginTop: '4px' }}>{state.errors.message[0]}</p>}
+          </div>
+
+          {/* Bouton de soumission */}
+          <Button
+            type="submit"
+            disabled={isPending}
+            style={{
+              width: '100%',
+              backgroundColor: '#3b82f6',
+              // hover: { backgroundColor: '#2563eb' },
+              color: 'white',
+              padding: '12px',
+              borderRadius: '4px',
+              cursor: 'pointer',
+            }}
+          >
+            {isPending ? "Envoi en cours..." : "Envoyer le message"}
+          </Button>
+
+          {/* Message de retour */}
+          {state.message && (
+            <div
+              style={{
+                marginTop: '16px',
+                padding: '12px',
+                borderRadius: '4px',
+                textAlign: 'center',
+                backgroundColor: state.message.includes("succès") ? '#d1fad6' : '#fcd5d8',
+                color: state.message.includes("succès") ? '#14532d' : '#9b2c2c',
+              }}
+            >
+              {state.message}
+            </div>
+          )}
+        </form>
+      </div>
+    </div>
+
+  );
+}
