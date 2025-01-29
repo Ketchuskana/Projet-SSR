@@ -1,4 +1,3 @@
-// my-app/src/app/page.tsx
 import Link from 'next/link';
 
 const HomePage = () => {
@@ -10,6 +9,9 @@ const HomePage = () => {
       </Link>
       <Link href="/details">
         <button>Aller à la page Details</button>
+      </Link>
+      <Link href="/projet">
+        <button>Voir les projets</button>
       </Link>
     </div>
   );
