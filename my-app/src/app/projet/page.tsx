@@ -1,3 +1,8 @@
+// app/projet/page.tsx
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
 interface Project {
     id: number;
     name: string;
@@ -5,24 +10,30 @@ interface Project {
     description: string;
 }
 
-async function fetchProjects(): Promise<Project[]> {
-    const response = await fetch('http://localhost:3000/api/projet');
-    console.log(response)
-    if (!response.ok) throw new Error('Erreur lors du chargement des projets');
-    return response.json();
-}
-
 export default async function ProjectsPage() {
     let projects: Project[] = [];
-    let error: string | null = null;
+    let error: string | undefined;
 
     try {
-        projects = await fetchProjects();
-    } catch (err: any) {
-        error = err.message;
+        projects = await prisma.projet.findMany({
+            select: {
+                id: true,
+                images: true,
+                name: true,
+                description: true,
+            },
+        });
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            error = err.message;
+        } else {
+            error = 'An unknown error occurred';
+        }
     }
 
-    if (error) return <p>Erreur : {error}</p>;
+    if (error) {
+        return <p>Erreur : {error}</p>;
+    }
 
     return (
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -38,6 +49,12 @@ export default async function ProjectsPage() {
                     />
                     <h2 className="text-xl font-bold">{project.name}</h2>
                     <p className="text-gray-600">{project.description}</p>
+                    <a
+                        href={`/details/${project.id}`}
+                        className="text-blue-500 hover:underline mt-4 inline-block"
+                    >
+                        Voir plus
+                    </a>
                 </div>
             ))}
         </div>
