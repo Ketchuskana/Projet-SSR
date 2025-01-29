@@ -1,6 +1,22 @@
-import prisma from "../../Prisma";
+// app/projet/[id]/page.tsx
+import { PrismaClient } from '@prisma/client';
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
+const prisma = new PrismaClient();
+
+interface Project {
+    id: number;
+    name: string;
+    images: string;
+    description: string;
+    contexte: string;
+    technologies: string;
+    client: string;
+    date_realisation: string;
+    objectifs: string;
+    resultats: string;
+}
 
 interface Props {
     params: {
@@ -9,12 +25,13 @@ interface Props {
 }
 
 const ProjetPage = async ({ params }: Props) => {
+    // Utilisation de Prisma pour récupérer les détails du projet
     const projet = await prisma.projet.findUnique({
-        where: { id: parseInt(params.id) },
+        where: { id: parseInt(params.id) }, // Récupération du projet par son ID
     });
 
     if (!projet) {
-        notFound();
+        notFound(); // Si le projet n'existe pas, on renvoie une erreur 404
     }
 
     return (
