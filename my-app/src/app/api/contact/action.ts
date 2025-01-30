@@ -1,4 +1,3 @@
-// my-app/src/app/api/contact/routes.ts
 'use server';
 
 import { z } from 'zod';
@@ -42,29 +41,33 @@ export async function submitContactForm(prevState: State, formData: FormData): P
   try {
     const { name, email, telephone, message } = validatedFields.data;
 
-      // Vérifier si l'email existe déjà dans la base de données
-      const existingUser = await prisma.user.findUnique({
-        where: { email },
-      });
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
 
-      if (existingUser) {
-        // Si l'email existe déjà, renvoyer un message indiquant que le message a déjà été envoyé
-        return { message: "Vous avez déjà envoyé un message avec cet email." };
-      }
+    if (existingUser) {
+      return { message: "Vous avez déjà envoyé un message avec cet email." };
+    }
 
     await prisma.user.create({
       data: {
         name,
         email,
-        telephone: telephone || null,
+        telephone: telephone || "undefined",
         message,
       },
     });
 
     return { message: "Votre message a été envoyé avec succès !" };
-  } catch (error: any) {
-    console.error("Erreur Prisma :", error);
-    return { message: "Erreur serveur : " + error.message };
+  }
+  catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error("Erreur Prisma :", error);
+      return { message: "Erreur serveur : " + error.message };
+    } else {
+      console.error("Erreur inconnue", error);
+      return { message: "Erreur serveur : un problème est survenu." };
+    }
   }
   
 }

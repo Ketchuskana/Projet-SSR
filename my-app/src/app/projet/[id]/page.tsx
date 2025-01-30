@@ -3,20 +3,14 @@ import prisma from "@/app/Prisma";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-module.exports = {
-    images: {
-        loader: 'custom',
-        loaderFile: 'projet.images',
-    },
-}
-
 type Props = {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 };
 
-export default async function ProjetDetailsPage({ params }: Props) {
+export default async function ProjetDetailsPage(props: Props) {
+    const params = await props.params;
     const projet = await prisma.projet.findUnique({
         where: { id: parseInt(params.id) },
     });

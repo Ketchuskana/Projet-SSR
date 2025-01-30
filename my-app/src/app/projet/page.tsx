@@ -2,6 +2,8 @@
 'use client'; 
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+
 
 interface Project {
     id: number;
@@ -33,8 +35,13 @@ export default function ProjectsPage() {
                 const response = await fetch(query);
                 const data = await response.json();
                 setProjects(data);
-            } catch (err) {
-                setError('Une erreur est survenue lors de la récupération des projets.');
+            } 
+            catch (err: unknown) {
+                if (err instanceof Error) {
+                    setError(`Une erreur est survenue : ${err.message}`);
+                } else {
+                    setError('Une erreur inconnue est survenue.');
+                }
             }
         };
 
@@ -85,11 +92,14 @@ export default function ProjectsPage() {
                         }`}
                     >
                         <div className="image-container">
-                            <img
+                            <Image
                                 src={project.images}
                                 alt={project.name}
                                 className="project-image"
+                                width={500}  
+                                height={350}
                             />
+
                             <div className="overlay">
                                 <h2 className="project-title">{project.name}</h2>
                                 <p className="description">{project.description}</p>
