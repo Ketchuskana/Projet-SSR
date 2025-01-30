@@ -126,6 +126,12 @@ Le composant **ProjectsPage** est conçu pour récupérer et afficher une liste 
 ## **ProjetDetailsPage**
 Le composant **ProjetDetailsPage** affiche les détails d'un projet unique. Les données sont récupérées via Prisma côté serveur, garantissant que la logique sensible (comme l'accès à la base de données) reste protégée. L'utilisation d'une fonction asynchrone assure que les requêtes en base de données sont effectuées efficacement et exclusivement sur le serveur.
 
+## **ProjetContact**
+
+Le formulaire de contact utilise use client pour permettre l'interactivité en temps réel avec l'utilisateur et use server pour gérer la validation et l'insertion des données côté serveur.
+- Côté client (use client) : Permet l'affichage dynamique des erreurs et du statut du formulaire sans rechargement de la page.
+- Côté serveur (use server) : Assure la validation sécurisée des données avec Zod et empêche toute altération des entrées utilisateur. L'enregistrement des messages dans la base de données est effectué via Prisma, évitant ainsi toute exposition de la logique métier au client
+
 ---
 
 # Justification de l'utilisation des React Server Components (RSC)
@@ -133,9 +139,10 @@ Le composant **ProjetDetailsPage** affiche les détails d'un projet unique. Les 
 ### 🔹 **Performances améliorées**
 - **ProjectsPage** récupère et affiche dynamiquement une liste de projets côté client. Grâce à `use client`, le contenu de la page s'adapte en temps réel aux changements, comme la sélection de catégories.
 - Les appels à la base de données via Prisma sont déclenchés côté client, garantissant une expérience interactive.
+- Le formulaire de contact combine use client et use server pour assurer une gestion efficace des entrées utilisateur et un rendu dynamique sans rechargement de page. La validation côté serveur améliore la sécurité et l'intégrité des données, tout en limitant la charge sur le client.
 
 ### 🔹 **Simplicité côté client**
-En déléguant le traitement des données au serveur, le client reçoit une page pré-rendue, évitant ainsi la gestion de requêtes complexes ou d'états inutiles côté client.
+En déléguant le traitement des données au serveur, le client reçoit une page pré-rendue, évitant ainsi la gestion de requêtes complexes ou d'états inutiles côté client. 
 
 ### 🔹 **Adaptation au type de contenu**
 Les **RSC** sont idéaux pour les pages où les données sont majoritairement statiques ou semi-dynamiques, comme une liste de projets ou des détails spécifiques. Cela garantit une architecture robuste et optimisée pour le rendu de contenu.
