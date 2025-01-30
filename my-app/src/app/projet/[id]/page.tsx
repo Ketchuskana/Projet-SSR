@@ -40,7 +40,7 @@ export default async function ProjetDetailsPage({ params }: Props) {
 
                 <div className="w-full lg:w-1/2 flex justify-center">
                     <Image
-                        src="/download.jpg"
+                        src={projet.images}
                         width={400}
                         height={300}
                         alt={projet.name}
