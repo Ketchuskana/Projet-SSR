@@ -93,15 +93,6 @@ export default function ProjectsPage() {
                     >
                         <div className="image-container">
                             <div className='flipper'>
-                            <div className="front">
-                                <Image
-                                src={project.images}
-                                alt={project.name}
-                                className="project-image"
-                                width={500}
-                                height={350}
-                                />
-                            </div>
                             <Image
                                 src={project.images}
                                 alt={project.name}
