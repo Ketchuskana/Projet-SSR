@@ -6,17 +6,17 @@ const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const tech = url.searchParams.get('tech'); // Récupère le paramètre 'tech' de l'URL
+  const tech = url.searchParams.get('tech');
 
   try {
     const projects = await prisma.projet.findMany({
       where: tech
         ? {
             technologies: {
-              contains: tech, // Filtrer les projets dont 'technologies' contient la valeur 'tech'
+              contains: tech,
             },
           }
-        : {}, // Si pas de filtre, récupère tous les projets
+        : {}, 
       select: {
         id: true,
         name: true,
