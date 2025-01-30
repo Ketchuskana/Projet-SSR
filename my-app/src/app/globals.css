@@ -83,6 +83,45 @@ body {
   font-weight: bolder;
 }
 
+/* Filtre projet */
+.technologies{
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.projects-techno {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.projects-techno li {
+  padding: 5px 10px;
+  border: 2px solid #ccc;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.projects-techno li.selected {
+  background-color: #3498db;
+  color: white;
+  border-color: #2980b9;
+}
+
+.projects-techno li:hover {
+  background-color: #cccccc68;
+}
+
+
+/* Carte projet */
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -170,46 +209,6 @@ body {
   color: white;
 }
 
-
-/* Filtre projet */
-
-.technologies{
-  margin: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.projects-techno {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.projects-techno li {
-  padding: 5px 10px;
-  border: 2px solid #ccc;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.projects-techno li.selected {
-  background-color: #3498db;
-  color: white;
-  border-color: #2980b9;
-}
-
-.projects-techno li:hover {
-  background-color: #cccccc68;
-}
-
-
-/* Carte projet */
 .image-container {
   perspective: 1000px;
   width: 100%;
