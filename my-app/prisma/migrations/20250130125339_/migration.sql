@@ -1,17 +1,19 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "telephone" TEXT NOT NULL,
     "message" TEXT NOT NULL,
-    "completed" BOOLEAN NOT NULL DEFAULT false
+    "completed" BOOLEAN NOT NULL DEFAULT false,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Projet" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "contexte" TEXT NOT NULL,
@@ -19,11 +21,13 @@ CREATE TABLE "Projet" (
     "resultats" TEXT NOT NULL,
     "objectifs" TEXT NOT NULL,
     "client" TEXT NOT NULL,
-    "date_realisation" DATETIME NOT NULL,
+    "date_realisation" TIMESTAMP(3) NOT NULL,
     "completed" BOOLEAN NOT NULL DEFAULT false,
     "images" TEXT NOT NULL,
     "videos" TEXT NOT NULL,
-    "testimonials" TEXT NOT NULL
+    "testimonials" TEXT NOT NULL,
+
+    CONSTRAINT "Projet_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
