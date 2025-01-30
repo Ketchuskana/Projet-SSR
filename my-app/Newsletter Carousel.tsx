@@ -1,18 +1,18 @@
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
-const logos = [
-  { src: "https://cruip-tutorials.vercel.app/logo-carousel/facebook.svg", alt: "Facebook" },
-  { src: "https://cruip-tutorials.vercel.app/logo-carousel/disney.svg", alt: "Disney" },
-  { src: "https://cruip-tutorials.vercel.app/logo-carousel/airbnb.svg", alt: "Airbnb" },
-  { src: "https://cruip-tutorials.vercel.app/logo-carousel/apple.svg", alt: "Apple" },
-  { src: "https://cruip-tutorials.vercel.app/logo-carousel/spark.svg", alt: "Spark" },
-  { src: "https://cruip-tutorials.vercel.app/logo-carousel/samsung.svg", alt: "Samsung" },
-  { src: "https://cruip-tutorials.vercel.app/logo-carousel/quora.svg", alt: "Quora" },
-  { src: "https://cruip-tutorials.vercel.app/logo-carousel/sass.svg", alt: "Sass" },
+const cinemaLogos = [
+  { src: "https://example.com/images/film-reel.jpg", alt: "Film Reel" },
+  { src: "https://example.com/images/people-watching-movie.jpg", alt: "People Watching Movie" },
+  { src: "https://example.com/images/film-clapper-board.png", alt: "Film Clapper Board" },
+  { src: "https://example.com/images/film-camera.jpg", alt: "Film Camera" },
+  { src: "https://example.com/images/cinema-screen.jpg", alt: "Cinema Screen" },
+  { src: "https://example.com/images/movie-theater.jpg", alt: "Movie Theater" },
+  { src: "https://example.com/images/film-strip.png", alt: "Film Strip" },
+  { src: "https://example.com/images/popcorn-and-movie-tickets.jpg", alt: "Popcorn and Movie Tickets" },
 ];
 
-const LogoCarousel: React.FC = () => {
+const NewsCarousel: React.FC = () => {
   const logosRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const LogoCarousel: React.FC = () => {
   return (
     <div className="w-full flex flex-row overflow-x-auto flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
       <ul ref={logosRef} className="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
-        {logos.map((logo, index) => (
+        {cinemaLogos.map((logo, index) => (
           <li key={index} className='px-4'>
             <Image src={logo.src} alt={logo.alt} width={400} height={400}/>
           </li>
@@ -39,4 +39,4 @@ const LogoCarousel: React.FC = () => {
   );
 };
 
-export default LogoCarousel;
+export default NewsCarousel;

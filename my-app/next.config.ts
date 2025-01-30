@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
       {
         hostname: 'img.icons8.com',
       },
+      {
+        hostname: 'example.com',
+      }
     ],
   },
 };

@@ -12,6 +12,13 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        'nunito-sans': ['var(--font-nunito-sans)', 'sans-serif'],
+        'dm-sans': ['var(--font-dm-sans)', 'sans-serif'],
+        'raleway': ['var(--font-raleway)', 'sans-serif'],
+        'quicksand': ['var(--font-quicksand)', 'sans-serif'],
+        'barlow': ['var(--font-barlow)', 'sans-serif']
+      },
     },
   },
   plugins: [],
