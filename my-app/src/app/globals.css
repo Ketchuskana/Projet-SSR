@@ -86,7 +86,7 @@ body {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
+  gap: 20px;
 }
 
 @media (max-width: 1024px) {
@@ -132,15 +132,15 @@ body {
 }
 
 .project-card.middle > .image-container > .project-image{
-  height: 400px;
+  height: 350px;
 }
 
 .project-card.right > .image-container > .project-image{
-  height: 400px; 
+  height: 350px; 
 } 
 
 .project-card.left > .image-container > .project-image{
-  height: 400px; 
+  height: 350px; 
 }
 
 .image-container {
