@@ -23,7 +23,7 @@ export default async function ProjetDetailsPage(props: Props) {
         <div className="p-6 lg:p-12 bg-gray-50">
 
             <div className="mb-20">
-                <h1 className=".text-6xl lg:text-5xl text-gray-900 font-sans">{projet.name}</h1>
+                <h1 className="text-5xl lg:text-5xl text-gray-900 font-sans">{projet.name}</h1>
                 <p className="text-lg text-gray-500">
                     <strong className="text-lg font-semibold text-gray-700">Client :</strong> {projet.client}
                 </p>
