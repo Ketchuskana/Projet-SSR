@@ -306,14 +306,6 @@ Passez le cap de la production cinématographique avec nos services d'IA génér
         </div> 
 
         </div>
-        <div className="flex">
-          <div>
-            L24 Agency
-          </div>
-          <div>
-            Agence et prestatire de réalisations web pour le cinéma
-          </div>
-          </div>
           {/* <Image
             aria-hidden
             src="/globe.svg"
