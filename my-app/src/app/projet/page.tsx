@@ -99,6 +99,7 @@ export default function ProjectsPage() {
                                 className="project-image"
                                 width={500}  
                                 height={350}
+                                priority={true}
                             />
 
                             <div className="overlay">

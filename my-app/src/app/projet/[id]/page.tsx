@@ -38,6 +38,7 @@ export default async function ProjetDetailsPage(props: Props) {
                         width={400}
                         height={300}
                         alt={projet.name}
+                        priority={true}
                         className="rounded-xl shadow-lg"
                     />
                 </div>
