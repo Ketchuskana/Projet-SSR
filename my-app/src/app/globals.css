@@ -70,3 +70,176 @@ body {
     @apply bg-background text-foreground;
   }
 }
+.container {
+  text-align: center;
+  padding: 0 100px;
+}
+
+.page-title {
+  font-size: 5rem;
+  color: rgba(152, 152, 143, 0.416);
+  margin-bottom: 40px;
+  font-family: Montserrat;
+  font-weight: bolder;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+}
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .project-card.middle {
+    height: auto;
+  }
+
+  .project-card.left,
+  .project-card.right {
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 10px 10px;
+  }
+  .page-title {
+    font-size: 4rem;
+    text-align: center;
+  }
+  .project-card.middle {
+    height: auto;
+  }
+
+  .project-card.left,
+  .project-card.right {
+    height: auto;
+  }
+}
+
+.project-card {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.project-card.middle > .image-container > .project-image{
+  height: 400px;
+}
+
+.project-card.right > .image-container > .project-image{
+  height: 400px; 
+} 
+
+.project-card.left > .image-container > .project-image{
+  height: 400px; 
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card .image-container {
+  flex-grow: 1;
+}
+
+.project-image {
+  width: 100%;
+  height: auto; 
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .overlay {
+  opacity: 1;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+.description {
+  margin-bottom: 20px;
+}
+
+.more-info-button {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  border: 2px solid #007bff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.more-info-button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+
+
+.technologies{
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.projects-techno {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.projects-techno li {
+  padding: 5px 10px;
+  border: 2px solid #ccc;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.projects-techno li.selected {
+  background-color: #3498db;
+  color: white;
+  border-color: #2980b9;
+}
+
+.projects-techno li:hover {
+  /* border-color: #2980b9; */
+  background-color: #cccccc68;
+}

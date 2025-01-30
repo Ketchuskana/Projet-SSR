@@ -1,7 +1,7 @@
 // app/projet/page.tsx
-import { PrismaClient } from '@prisma/client';
+'use client'; 
 
-const prisma = new PrismaClient();
+import { useState, useEffect } from 'react';
 
 interface Project {
     id: number;
@@ -10,53 +10,97 @@ interface Project {
     description: string;
 }
 
-export default async function ProjectsPage() {
-    let projects: Project[] = [];
-    let error: string | undefined;
+export default function ProjectsPage() {
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [error, setError] = useState<string | undefined>();
+    const [tech, setTech] = useState<string | undefined>(undefined);
 
-    try {
-        projects = await prisma.projet.findMany({
-            select: {
-                id: true,
-                images: true,
-                name: true,
-                description: true,
-            },
-        });
-    } catch (err: unknown) {
-        if (err instanceof Error) {
-            error = err.message;
-        } else {
-            error = 'An unknown error occurred';
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const techParam = queryParams.get('tech');
+        if (techParam) {
+            setTech(techParam); 
         }
-    }
+    }, []);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                let query = '/api/projet';
+                if (tech) {
+                    query += `?tech=${tech}`; 
+                }
+                const response = await fetch(query);
+                const data = await response.json();
+                setProjects(data);
+            } catch (err) {
+                setError('Une erreur est survenue lors de la récupération des projets.');
+            }
+        };
+
+        fetchProjects();
+    }, [tech]); 
+
+    // Liste des technologies
+    const technologies = ['React', 'Node.js', 'Flutter', 'Laravel', 'Vue.js', 'WordPress', 'Next.js', 'Tailwind CSS', 'Firebase', 'PostgreSQL'];
+
+    // Filtrer les projets par technologie
+    const handleSelectTech = (tech: string) => {
+        window.history.pushState({}, '', `/projet?tech=${tech}`); 
+        setTech(tech); 
+    };
 
     if (error) {
         return <p>Erreur : {error}</p>;
     }
 
     return (
-        <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
-                <div
-                    key={project.id}
-                    className="rounded-xl shadow-lg p-4 border border-gray-200 hover:shadow-xl transition-shadow"
-                >
-                    <img
-                        src={"/download.jpg"}
-                        alt={project.name}
-                        className="rounded-lg mb-4 w-full h-48 object-cover"
-                    />
-                    <h2 className="text-xl font-bold">{project.name}</h2>
-                    <p className="text-gray-600">{project.description}</p>
-                    <a
-                        href={`/projet/${project.id}`}
-                        className="text-blue-500 hover:underline mt-4 inline-block"
+        <div className="container">
+            <h1 className="page-title">NOS PROJETS</h1>
+            {/* Liste des technologies avec gestion de sélection */}
+            <div className="technologies">
+                <ul className="projects-techno">
+                    <li>
+                        <a href={`/projet`}>
+                        Tous les projets
+                        </a>
+                    </li>
+                    {technologies.map((techItem) => (
+                        <li
+                            key={techItem}
+                            onClick={() => handleSelectTech(techItem)}
+                            className={techItem === tech ? 'selected' : ''}
+                        >
+                            {techItem}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className="projects-grid">
+                {projects.map((project, index) => (
+                    <div
+                        key={project.id}
+                        className={`project-card ${
+                            index % 3 === 1 ? 'middle' : index % 3 === 0 ? 'left' : 'right'
+                        }`}
                     >
-                        Voir plus
-                    </a>
-                </div>
-            ))}
+                        <div className="image-container">
+                            <img
+                                src={project.images}
+                                alt={project.name}
+                                className="project-image"
+                            />
+                            <div className="overlay">
+                                <h2 className="project-title">{project.name}</h2>
+                                <p className="description">{project.description}</p>
+                                <a href={`/projet/${project.id}`} className="more-info-button">
+                                    Voir plus
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

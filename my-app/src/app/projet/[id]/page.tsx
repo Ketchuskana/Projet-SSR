@@ -3,6 +3,13 @@ import prisma from "@/app/Prisma";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+module.exports = {
+    images: {
+      loader: 'custom',
+      loaderFile: 'projet.images',
+    },
+}
+
 type Props = {
     params: {
         id: string;
@@ -22,12 +29,13 @@ export default async function ProjetDetailsPage({ params }: Props) {
         <div className="p-4">
             <h1 className="text-3xl font-bold">{projet.name}</h1>
             <Image
-                src={"/download.jpg"} 
+                src={projet.images} 
                 width={400}
                 height={300}
                 alt={projet.name}
                 className="rounded-lg my-4"
             />
+            
             <p>
                 <strong>Name :</strong> {projet.name}
             </p>
