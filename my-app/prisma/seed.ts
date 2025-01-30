@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
+  
   await prisma.projet.createMany({
     data: [
       {
@@ -19,6 +20,7 @@ async function main() {
         date_realisation: new Date("2023-12-01"),
         completed: false,
       },
+
       {
         name: "Application mobile",
         description: "Une application mobile pour gérer les tâches.",
@@ -33,6 +35,7 @@ async function main() {
         date_realisation: new Date("2025-01-15"),
         completed: true,
       },
+         
       {
         name: "Système de réservation",
         description: "Une application de réservation en ligne.",
@@ -47,20 +50,22 @@ async function main() {
         date_realisation: new Date("2023-09-15"),
         completed: false,
       },
+
       {
         name: "Site vitrine",
-        description: "Un site vitrine pour une entreprise.",
-        contexte: "Présenter les services et produits d'une société.",
-        technologies: "WordPress, Elementor.",
-        resultats: "Augmentation des demandes de contact.",
-        objectifs: "Offrir une vitrine moderne et responsive.",
-        images:"https://i.postimg.cc/fyr7JVv2/mediath-que.png",
-        videos: "https://drive.google.com/file/d/182SGwU2F2uCV8WMr1GDn5LNRk1vPWVHa/view?usp=drive_link",
-        testimonials: "Un site clair et efficace pour notre entreprise.",
-        client: "Client I",
-        date_realisation: new Date("2024-02-10"),
-        completed: true,
+      description: "Un site vitrine pour une entreprise.",
+      contexte: "Présenter les services et produits d'une société.",
+      technologies: "WordPress, Elementor.",
+      resultats: "Augmentation des demandes de contact.",
+      objectifs: "Offrir une vitrine moderne et responsive.",
+      images:"https://i.postimg.cc/fyr7JVv2/mediath-que.png",
+      videos: "https://drive.google.com/file/d/182SGwU2F2uCV8WMr1GDn5LNRk1vPWVHa/view?usp=drive_link",
+      testimonials: "Un site clair et efficace pour notre entreprise.",
+      client: "Client I",
+      date_realisation: new Date("2024-02-10"),
+      completed: true,
       },
+
       {
         name: "Dashboard analytique",
         description: "Un tableau de bord pour visualiser des données.",
@@ -75,6 +80,7 @@ async function main() {
         date_realisation: new Date("2024-05-20"),
         completed: true,
       },
+
       {
         name: "Portfolio créatif",
         description: "Un portfolio pour un artiste.",
@@ -89,6 +95,8 @@ async function main() {
         date_realisation: new Date("2024-07-10"),
         completed: false,
       },
+    
+
     ],
   });
 

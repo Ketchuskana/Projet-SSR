@@ -83,6 +83,9 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -115,6 +118,11 @@ exports.Prisma.ProjetScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 
@@ -160,7 +168,7 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "sqlite",
+  "activeProvider": "postgresql",
   "postinstall": false,
   "inlineDatasources": {
     "db": {
@@ -170,8 +178,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  createdAt DateTime @default(now())\n  name      String\n  email     String   @unique\n  telephone String\n  message   String\n  completed Boolean  @default(false)\n}\n\nmodel Projet {\n  id               Int      @id @default(autoincrement())\n  name             String\n  description      String\n  contexte         String\n  technologies     String\n  resultats        String\n  objectifs        String\n  client           String\n  date_realisation DateTime\n  completed        Boolean  @default(false)\n  images           String\n  videos           String\n  testimonials     String\n}\n",
-  "inlineSchemaHash": "2f83732cfa66535110c629a034d34fa095254ddeba9a77be43af9b7e0921be3c",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  createdAt DateTime @default(now())\n  name      String\n  email     String   @unique\n  telephone String\n  message   String\n  completed Boolean  @default(false)\n}\n\nmodel Projet {\n  id               Int      @id @default(autoincrement())\n  name             String\n  description      String\n  contexte         String\n  technologies     String\n  resultats        String\n  objectifs        String\n  client           String\n  date_realisation DateTime\n  completed        Boolean  @default(false)\n  images           String\n  videos           String\n  testimonials     String\n}\n",
+  "inlineSchemaHash": "f9d2f76b53370cddacff2adc8b787a74305f15631f88af018f99963ea0a20096",
   "copyEngine": true
 }
 config.dirname = '/'
