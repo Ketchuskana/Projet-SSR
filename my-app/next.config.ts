@@ -8,7 +8,11 @@ const nextConfig: NextConfig = {
       },
       {
         hostname: 'example.com',
-      }
+      },
+      {
+        protocol: "https",
+        hostname: "i.postimg.cc",
+      },
     ],
   },
 };
