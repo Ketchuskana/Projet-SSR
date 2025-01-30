@@ -391,5 +391,3 @@ Passez le cap de la production cinématographique avec nos services d'IA génér
     </div>
   );
 }
-
-export default HomePage;

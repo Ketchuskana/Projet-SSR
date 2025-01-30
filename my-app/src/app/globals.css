@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
 @layer utilities {
   .fill-yellow {
     fill: #FFD700; /* You can use any color you prefer */
@@ -12,15 +11,9 @@
 :root {
   --background: #ffffff;
   --foreground: #ffffff;
-=======
-body {
-  font-family: Arial, Helvetica, sans-serif;
->>>>>>> 6115d3727a68450dc89b54337b16425c0340ee92
-}
 
 @layer base {
   :root {
-<<<<<<< HEAD
     --background: #ffffff;
     --foreground: #ffffff;
   }
@@ -30,7 +23,6 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, sans-serif;
-=======
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -92,7 +84,6 @@ body {
   body {
     @apply bg-background text-foreground;
   }
->>>>>>> 6115d3727a68450dc89b54337b16425c0340ee92
 }
 .container {
   text-align: center;
