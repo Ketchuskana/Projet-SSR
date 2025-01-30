@@ -2,15 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .fill-yellow {
+    fill: #FFD700; /* You can use any color you prefer */
+  }
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #393939;
+  --foreground: #393939;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #393939;
+    --foreground: #393939;
   }
 }
 
