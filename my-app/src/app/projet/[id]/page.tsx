@@ -1,12 +1,12 @@
 // app/projet/[id]/page.tsx
-import prisma from "@/app/Prisma"; 
+import prisma from "@/app/Prisma";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
 module.exports = {
     images: {
-      loader: 'custom',
-      loaderFile: 'projet.images',
+        loader: 'custom',
+        loaderFile: 'projet.images',
     },
 }
 
@@ -36,7 +36,7 @@ export default async function ProjetDetailsPage({ params }: Props) {
             </div>
 
 
-            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12">
+            <div className="flex flex-col lg:flex-row items-center lg:items-start  gap-12">
 
                 <div className="w-full lg:w-1/2 flex justify-center">
                     <Image
@@ -48,7 +48,7 @@ export default async function ProjetDetailsPage({ params }: Props) {
                     />
                 </div>
 
-                <div className="grid grid-cols-2 gap-y-4">
+                <div className="grid grid-cols-2 gap-y-4 mt-10">
                     <div className="text-lg font-semibold text-gray-700">Contexte</div>
                     <div className="text-lg text-gray-500">{projet.contexte}</div>
 
@@ -71,7 +71,8 @@ export default async function ProjetDetailsPage({ params }: Props) {
                     {projet.videos && (
                         <>
                             <div className="text-lg font-semibold text-gray-700">Vidéos</div>
-                            <div className="text-lg text-gray-500">{projet.videos}</div>
+                            <a className="text-lg text-blue-500 underline hover:text-blue-700" href={projet.videos} target="_blank" rel="noopener noreferrer"
+> Lien</a>
                         </>
                     )}
                 </div>
