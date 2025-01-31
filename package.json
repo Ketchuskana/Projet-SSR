@@ -6,6 +6,7 @@
     "tailwindcss": "^4.0.0"
   },
   "dependencies": {
-    "@prisma/client": "^6.2.1"
+    "@prisma/client": "^6.2.1",
+    "next-video": "^2.0.1"
   }
 }
